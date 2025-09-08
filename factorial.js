@@ -1,8 +1,8 @@
 const readline = require("readline");
 
 const rl = readline.createInterface({
-    input:process.stdin,
-    output:process.stdout
+    input: process.stdin,
+    output: process.stdout
 
 })
 
@@ -16,11 +16,12 @@ console.log("3. exit");
 rl.question("Enter your choice (1-3)", choice =>{
     if(choice === "1"){
         console.log("Hello There!");
+        backToMenu();
     }else if (choice === "2"){
-        computefactorial();
-        console.log("factorial");
+        computeFactorial();
+        
     } else if(choice === "3");{
-        console.log("exiting program...Goodbye");
+        console.log("existing program...Goodbye");
         rl.close();
 
         console.log("Invalid choice, Please try again");
@@ -60,12 +61,12 @@ function backToMenu(){
     console.log("1. Back to menu");
     console.log("2. Exit");
 
-    rl.question("What would you like to do next? (1-2 :", (backToMenuChoice) =>{
+    rl.question("What would you like to do next? (1-2) :", (backToMenuChoice) =>{
         if(backToMenuChoice ==="1"){
             console.clear();
             mainMenu();
-        } else if (backToMenuchoice === "2"){
-            console.log("exixsting progtam...Goodbye");
+        } else if (backToMenuChoice === "2"){
+            console.log("existing program...Goodbye");
             rl.close();
         }else{
             console.log("invalid choice. Please try again");
