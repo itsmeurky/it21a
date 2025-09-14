@@ -4,11 +4,8 @@ class Person{
          this.name = name;
          this.age = age;
          this.occupation = occupation;
-    }
-
-    getName(){
-        console.log(this.name);
-    }
+   
+     }
 
     
     displayInfo(){
@@ -20,9 +17,10 @@ class Person{
 
 }
 
-const person1 = new Person("Coco Martin", "24" , "Masahista");
+     const person1 = new Person("Coco Martin", "24" , "Masahista");
+     const person2 = new person ("tanggol", 29, "ex mayor");
 
 person1.getName();
-person1.displayInfo();
+person2.displayInfo();
 
 
