@@ -12,9 +12,14 @@ class Hero{
     }
 }
 
-    const hero = new Hero("Thorin",100,10);
+class Warrior extends Hero{
+    useAbility(){
+        console.log(`${this.name}'uses power Strike`);
+    }
+}   
 
-    console.log(hero.getHealth());
-    hero.getHealth();
+const warrior = new Warrior("Thorin",100,10);
+warrior.useAbility()
 
+    
     
