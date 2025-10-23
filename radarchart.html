@@ -7,12 +7,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Line Chart</h1>
+    <h1>Radar Chart</h1>
     <div>
   <canvas id="radarChart"></canvas>
     </div>  
 </body>
 <script>
+
 class radarChart{
     constructor(canvasId,dataUrl){
         this.canvasId = canvasId;
@@ -36,7 +37,7 @@ class radarChart{
                 responsive: true,
                 plugins:{
                     legend:{
-                        position : "top"
+                        position :"top"
 
                     },
                     tittle:{
@@ -58,10 +59,10 @@ class radarChart{
     }
     async fetchData(){
         try{
-            const responsive = await fetch(this.dataUrl);
-            if(!responsive.ok) throw new Error('Failed To Load Data:($(responsive.statusText)');
+            const response = await fetch(this.dataUrl);
+            if(!response.ok) throw new Error(`Failed To Load Data: ${response.statusText}`);
 
-            const data = await responsive.json();
+            const data = await response.json();
             return data;
         }catch(error){
             console.error("Error fetching Data:" , error);
@@ -75,8 +76,8 @@ class radarChart{
     }
 }
 
-document.addEventsListener("DOMContextLoaded" , ()=>{
-    const chart = new radarChart("radarChart", "radarChart.json");
+document.addEventListener("DOMContentLoaded" , ()=>{
+    const chart = new radarChart("radarChart", "radarData.json");
     chart.init();
 });
 
