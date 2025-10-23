@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Radar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Line Chart</h1>
+    <div>
+  <canvas id="radarChart"></canvas>
+    </div>  
+</body>
+<script>
+class radarChart{
+    constructor(canvasId,dataUrl){
+        this.canvasId = canvasId;
+        this.dataUrl = dataUrl;
+        this.chart = null;
+    }
+
+    renderChart(data){
+        const ctx = document.getElementById(this.canvasId).getContext("2d");
+
+        this.chart = new Chart(ctx,{
+            type:"radar",
+            data:{
+                //labels
+                labels:data.labels,
+                //Datasets
+                datasets:data.datasets
+
+            },
+            options:{
+                responsive: true,
+                plugins:{
+                    legend:{
+                        position : "top"
+
+                    },
+                    tittle:{
+                        display:true,
+                        text:"Radar Chart"
+                    }
+                },
+                scales:{
+                    r:{
+                        angleLines:{display:true},
+                        suggestedMin:0,
+                        suggestedMax:100
+
+                    }
+                }
+            }
+            
+        });
+    }
+    async fetchData(){
+        try{
+            const responsive = await fetch(this.dataUrl);
+            if(!responsive.ok) throw new Error('Failed To Load Data:($(responsive.statusText)');
+
+            const data = await responsive.json();
+            return data;
+        }catch(error){
+            console.error("Error fetching Data:" , error);
+            return null;
+        }
+    }
+
+    async init(){
+        const data = await this.fetchData();
+        if(data)this.renderChart(data);
+    }
+}
+
+document.addEventsListener("DOMContextLoaded" , ()=>{
+    const chart = new radarChart("radarChart", "radarChart.json");
+    chart.init();
+});
+
+</script>
+</html>
+
+    
